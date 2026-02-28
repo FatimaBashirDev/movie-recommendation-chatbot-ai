@@ -1,0 +1,127 @@
+@import "tailwindcss";
+
+:root {
+  /* Netflix Color Theme */
+  --background: #000000;
+  --foreground: #ffffff;
+  --primary: #E50914;
+  --primary-hover: #F40612;
+  --text-secondary: #B3B3B3;
+  --card-bg: #141414;
+  --card-hover: #1F1F1F;
+  --nav-bg: rgba(0, 0, 0, 0.9);
+  --input-bg: #333333;
+  --input-text: #FFFFFF;
+  --border-color: #333333;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-text-secondary: var(--text-secondary);
+  --color-card-bg: var(--card-bg);
+  --color-card-hover: var(--card-hover);
+  --color-nav-bg: var(--nav-bg);
+  --color-input-bg: var(--input-bg);
+  --color-input-text: var(--input-text);
+  --color-border: var(--border-color);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Netflix-style button styles */
+.btn-primary {
+  background-color: var(--primary);
+  color: var(--foreground);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+/* Netflix-style input styles */
+.input-netflix {
+  background-color: var(--input-bg);
+  color: var(--input-text);
+  border: 1px solid var(--border-color);
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  outline: none;
+}
+
+.input-netflix:focus {
+  border-color: var(--primary);
+}
+
+/* Netflix-style card styles */
+.card-netflix {
+  background-color: var(--card-bg);
+  border-radius: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.card-netflix:hover {
+  background-color: var(--card-hover);
+}
+
+/* Custom Animations */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scroll {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out forwards;
+}
+
+.animate-scroll {
+  animation: scroll 1.5s ease-in-out infinite;
+}

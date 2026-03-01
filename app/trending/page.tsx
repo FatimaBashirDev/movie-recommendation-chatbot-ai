@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 
 export default function TrendingPage() {
   return (
-    <div className="min-h-screen bg-[#000000]">
+    <div className="min-h-screen bg-[#000000] pt-12 md:pt-0">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:pt-24">
         {/* Header */}
         <div className="text-center mb-12">

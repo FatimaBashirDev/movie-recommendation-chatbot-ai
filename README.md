@@ -1,349 +1,132 @@
-# 🎬 CineMatch AI - Netflix-Style Movie Recommender
+Readme · MDCopy🎬 CineMatch AI - Netflix-Style Movie Recommender
+An AI-powered movie recommendation chatbot with a Netflix-inspired UI, built with Next.js, Supabase, and Groq API.
+🚀 Live Demo
+https://movie-recommendation-chatbot-ai.vercel.app
 
-An intelligent movie recommendation chatbot powered by AI that helps you discover your next favorite film through natural conversation.
+✨ Features
 
-## ✨ Features
+🤖 AI-Powered Recommendations - Chat with Llama 3.3 70B via Groq API for fast, personalized movie suggestions
+🎯 Smart Filtering - RAG (Retrieval Augmented Generation) system ensures accurate recommendations from a curated database
+💬 Conversational Interface - Natural language processing with conversation memory
+🔐 Authentication - Email/password and Google OAuth login powered by Supabase
+🛡️ Protected Routes - AI Chat page accessible only after authentication
+🎨 Netflix-Inspired UI - Beautiful dark theme with responsive design
+📱 Fully Responsive - Works seamlessly on desktop, tablet, and mobile
+🎭 Multi-Genre Support - Action, Comedy, Drama, Horror, Sci-Fi, Romance, Thriller, and more
+🔍 Advanced Filtering - Filter by genre, year, rating, and mood
 
-- 🤖 **AI-Powered Recommendations** - Chat with Llama 3.2 AI to get personalized movie suggestions
-- 🎯 **Smart Filtering** - Advanced RAG (Retrieval Augmented Generation) system ensures accurate recommendations
-- 💬 **Conversational Interface** - Natural language processing for human-like interactions
-- 🎨 **Netflix-Inspired UI** - Beautiful, responsive design with glassmorphism effects
-- ⚡ **Lightning Fast** - Optimized for speed with conversation memory
-- 📱 **Fully Responsive** - Works seamlessly on desktop, tablet, and mobile
-- 🎭 **Multi-Genre Support** - Action, Comedy, Drama, Horror, Sci-Fi, Romance, and more
-- 🔍 **Advanced Search** - Filter by genre, year, rating, and mood
-- 🌙 **Dark Mode** - Eye-friendly dark theme throughout
 
-## 🛠️ Tech Stack
+🛠️ Tech Stack
+TechnologyPurposeNext.js 14 (App Router)React-based full-stack frameworkTypeScriptStatic typing and code reliabilityTailwind CSSUI styling and responsive designSupabaseAuthentication (Email + Google OAuth)Groq API (Llama 3.3 70B)AI-generated movie recommendationsLucide ReactIcon libraryVercelDeployment
 
-- **Frontend:** Next.js 14 (App Router), React 18, TypeScript
-- **Styling:** Tailwind CSS, Lucide Icons
-- **AI/ML:** Hugging Face API, Llama 3.2-3B-Instruct
-- **Architecture:** RAG (Retrieval Augmented Generation)
-- **Deployment:** Vercel
-- **State Management:** React Hooks
+🎨 Pages
+PageRouteAccessDescriptionHome/PublicLanding page with hero sectionAI Chat/chatProtectedAI-powered movie recommendation interfaceBrowse/browsePublicMovies categorized by genreTrending/trendingPublicPopular and top-rated moviesAbout/aboutPublicHow the recommendation system worksLogin/loginPublicEmail or Google sign inSignup/signupPublicNew user registration
 
-## 🚀 Live Demo
+🔐 Authentication Flow
 
-[View Live Demo](https://aimovie-recommendation-chatbot-l0qxkj90x.vercel.app/)
+User clicks Start Chatting or visits /chat
+Redirected to /login if not authenticated
+Login via email/password or Continue with Google
+Google OAuth redirects through /auth/callback to exchange session
+User is redirected to /chat upon successful login
+Authenticated user name displayed in the navbar
+Logout available from navbar
 
-## 🎯 How It Works
 
-1. **User Input** - Tell the AI what kind of movie you're looking for
-2. **Smart Filtering** - RAG system filters 22+ curated movies based on your preferences
-3. **AI Generation** - Llama 3.2 creates personalized, conversational recommendations
-4. **Instant Results** - Get 3-5 movie suggestions with detailed descriptions in seconds
+🧠 AI Implementation
+This project uses RAG (Retrieval Augmented Generation):
 
-## 🏃‍♂️ Quick Start
+Retrieval - Smart filtering finds relevant movies from the curated database based on user input
+Augmentation - Filtered movies are injected as context into the AI prompt
+Generation - Groq's Llama 3.3 70B model generates natural, conversational recommendations
 
-### Prerequisites
+This ensures the AI only recommends movies from your database — no hallucinations!
 
-- Node.js 18+ 
-- Hugging Face API Key (free)
-
-### Installation
-
-1. Clone the repository
-```bash
-git clone https://github.com/yourusername/netflix-style-ai-movie-recommender.git
-cd netflix-style-ai-movie-recommender
-```
-
-2. Install dependencies
-```bash
-npm install
-```
-
-3. Set up environment variables
-```bash
-# Create .env.local file
-HUGGINGFACE_API_KEY=your_api_key_here
-```
-
-4. Run the development server
-```bash
-npm run dev
-```
-
-5. Open [http://localhost:3000](http://localhost:3000)
-
-## 🎨 Pages
-
-- **Home** - Landing page with features and CTA
-- **Chat** - AI chatbot interface with conversation memory
-- **Trending** - Curated trending movies with Netflix-style cards
-- **Browse** - Filter movies by genre with dynamic results
-- **About** - How the AI recommendation system works
-
-## 🧠 AI Implementation
-
-This project uses **RAG (Retrieval Augmented Generation)**:
-
-1. **Retrieval:** Smart filtering finds relevant movies from database
-2. **Augmentation:** Filtered movies are added as context to AI prompt
-3. **Generation:** Llama 3.2 creates natural, conversational recommendations
-
-This ensures the AI only recommends movies from your curated database - no hallucinations!
-
-## 📦 Project Structure
-```
+📦 Project Structure
 ├── app/
-│   ├── api/chat/route.ts          # AI chatbot API endpoint
-│   ├── chat/page.tsx               # Chat interface
-│   ├── trending/page.tsx           # Trending movies
-│   ├── browse/page.tsx             # Browse with filters
-│   ├── about/page.tsx              # About page
-│   └── layout.tsx                  # Root layout
+│   ├── api/chat/route.ts          # Groq AI chatbot API endpoint
+│   ├── auth/callback/route.ts     # Supabase OAuth callback handler
+│   ├── chat/page.tsx              # Protected AI chat interface
+│   ├── browse/page.tsx            # Browse movies by genre
+│   ├── trending/page.tsx          # Trending movies page
+│   ├── about/page.tsx             # About page
+│   ├── login/page.tsx             # Login page
+│   ├── signup/page.tsx            # Signup page
+│   └── layout.tsx                 # Root layout
 ├── components/
-│   ├── Navbar.tsx                  # Navigation component
-│   └── Footer.tsx                  # Footer component
+│   ├── Navbar.tsx                 # Navigation component
+│   └── Footer.tsx                 # Footer component
 ├── lib/
-│   └── movies.ts                   # Movie database
-└── .env.local                      # Environment variables
-```
+│   ├── movies.ts                  # Curated movie database
+│   └── supabase.ts                # Supabase client
+└── .env.local                     # Environment variables
 
-## 🔐 Environment Variables
+🏃‍♂️ Quick Start
+Prerequisites
 
-Create a `.env.local` file:
-```env
-HUGGINGFACE_API_KEY=hf_xxxxxxxxxxxxx
-```
+Node.js 18+
+Supabase account (free)
+Groq API key (free)
 
-Get your free API key from [Hugging Face](https://huggingface.co/settings/tokens)
+Installation
 
-## 🎯 Features in Detail
+Clone the repository
 
-### Conversational AI
-- Natural language understanding
-- Context-aware responses
-- Conversation memory (remembers previous messages)
-- Handles off-topic queries gracefully
+bashgit clone https://github.com/FatimaBashirDev/movie-recommendation-chatbot-ai.git
+cd movie-recommendation-chatbot-ai
 
-### Smart Filtering
-- Genre detection (Action, Comedy, Drama, etc.)
-- Year range filtering (90s, 2000s, recent, classics)
-- Rating filters (highly rated, best)
-- Title-based search with prioritization
+Install dependencies
 
-### Optimized Performance
-- Limited to 5 movies per query for faster responses
-- 4-message conversation history for context efficiency
-- 30-second timeout protection
-- Optimized token usage (250 max tokens)
+bashnpm install
 
-## 🤝 Contributing
+Set up environment variables — create a .env.local file:
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+envNEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+GROQ_API_KEY=your_groq_api_key
 
-## 📝 License
+Run the development server
 
-This project is open source and available under the [MIT License](LICENSE).
+bashnpm run dev
 
-## 👨‍💻 Author
+Open http://localhost:3000
 
-**Your Name**
-- GitHub: [FatimaBashirDev](https://github.com/FatimaBashirDev)
-- LinkedIn: [FatimaBashir](https://www.linkedin.com/in/fatima-bashir-b9a538346/)
 
-## 🙏 Acknowledgments
+🔑 Environment Variables
+VariableDescriptionNEXT_PUBLIC_SUPABASE_URLYour Supabase project URLNEXT_PUBLIC_SUPABASE_ANON_KEYYour Supabase anonymous public keyGROQ_API_KEYYour Groq API key for AI responses
 
-- [Hugging Face](https://huggingface.co/) for AI API
-- [The Movie Database (TMDb)](https://www.themoviedb.org/) for movie posters
-- [Vercel](https://vercel.com/) for hosting
-- [Next.js](https://nextjs.org/) for the amazing framework
+⚙️ Supabase Setup
 
-## ⭐ Show your support
+Create a project at supabase.com
+Enable Google under Authentication → Providers
+Go to Authentication → URL Configuration and set:
 
-Give a ⭐️ if this project helped you learn about AI chatbots and RAG implementation!
+Site URL: http://localhost:3000
+Redirect URLs: http://localhost:3000/auth/callback
 
----
 
-**Built with ❤️ and AI**
-```
+For production, also add your Vercel URL to Redirect URLs
 
----
 
-## **ULTRA-SHORT VERSION (Twitter/LinkedIn):**
-```
-🎬 Built an AI movie chatbot with Next.js + Hugging Face Llama 3.2!
+🤝 Contributing
+Contributions are welcome! Feel free to submit a Pull Request.
 
-Features RAG architecture, Netflix-style UI, and conversational recommendations.
+📝 License
+This project is open source and available under the MIT License.
 
-Live demo: # 🎬 CineMatch AI - Netflix-Style Movie Recommender
+👩‍💻 Author
+Fatima Bashir — Next.js Developer
 
-An intelligent movie recommendation chatbot powered by AI that helps you discover your next favorite film through natural conversation.
+GitHub: FatimaBashirDev
+LinkedIn: Fatima Bashir
 
-## ✨ Features
 
-- 🤖 **AI-Powered Recommendations** - Chat with Llama 3.2 AI to get personalized movie suggestions
-- 🎯 **Smart Filtering** - Advanced RAG (Retrieval Augmented Generation) system ensures accurate recommendations
-- 💬 **Conversational Interface** - Natural language processing for human-like interactions
-- 🎨 **Netflix-Inspired UI** - Beautiful, responsive design with glassmorphism effects
-- ⚡ **Lightning Fast** - Optimized for speed with conversation memory
-- 📱 **Fully Responsive** - Works seamlessly on desktop, tablet, and mobile
-- 🎭 **Multi-Genre Support** - Action, Comedy, Drama, Horror, Sci-Fi, Romance, and more
-- 🔍 **Advanced Search** - Filter by genre, year, rating, and mood
-- 🌙 **Dark Mode** - Eye-friendly dark theme throughout
+🙏 Acknowledgments
 
-## 🛠️ Tech Stack
+Groq for blazing fast AI inference
+Supabase for authentication
+Vercel for hosting
+Next.js for the framework
 
-- **Frontend:** Next.js 14 (App Router), React 18, TypeScript
-- **Styling:** Tailwind CSS, Lucide Icons
-- **AI/ML:** Hugging Face API, Llama 3.2-3B-Instruct
-- **Architecture:** RAG (Retrieval Augmented Generation)
-- **Deployment:** Vercel
-- **State Management:** React Hooks
 
-## 🚀 Live Demo
-
-[View Live Demo](https://aimovie-recommendation-chatbot-l0qxkj90x.vercel.app/)
-
-## 🎯 How It Works
-
-1. **User Input** - Tell the AI what kind of movie you're looking for
-2. **Smart Filtering** - RAG system filters 22+ curated movies based on your preferences
-3. **AI Generation** - Llama 3.2 creates personalized, conversational recommendations
-4. **Instant Results** - Get 3-5 movie suggestions with detailed descriptions in seconds
-
-## 🏃‍♂️ Quick Start
-
-### Prerequisites
-
-- Node.js 18+ 
-- Hugging Face API Key (free)
-
-### Installation
-
-1. Clone the repository
-```bash
-git clone https://github.com/yourusername/netflix-style-ai-movie-recommender.git
-cd netflix-style-ai-movie-recommender
-```
-
-2. Install dependencies
-```bash
-npm install
-```
-
-3. Set up environment variables
-```bash
-# Create .env.local file
-HUGGINGFACE_API_KEY=your_api_key_here
-```
-
-4. Run the development server
-```bash
-npm run dev
-```
-
-5. Open [http://localhost:3000](http://localhost:3000)
-
-## 🎨 Pages
-
-- **Home** - Landing page with features and CTA
-- **Chat** - AI chatbot interface with conversation memory
-- **Trending** - Curated trending movies with Netflix-style cards
-- **Browse** - Filter movies by genre with dynamic results
-- **About** - How the AI recommendation system works
-
-## 🧠 AI Implementation
-
-This project uses **RAG (Retrieval Augmented Generation)**:
-
-1. **Retrieval:** Smart filtering finds relevant movies from database
-2. **Augmentation:** Filtered movies are added as context to AI prompt
-3. **Generation:** Llama 3.2 creates natural, conversational recommendations
-
-This ensures the AI only recommends movies from your curated database - no hallucinations!
-
-## 📦 Project Structure
-```
-├── app/
-│   ├── api/chat/route.ts          # AI chatbot API endpoint
-│   ├── chat/page.tsx               # Chat interface
-│   ├── trending/page.tsx           # Trending movies
-│   ├── browse/page.tsx             # Browse with filters
-│   ├── about/page.tsx              # About page
-│   └── layout.tsx                  # Root layout
-├── components/
-│   ├── Navbar.tsx                  # Navigation component
-│   └── Footer.tsx                  # Footer component
-├── lib/
-│   └── movies.ts                   # Movie database
-└── .env.local                      # Environment variables
-```
-
-## 🔐 Environment Variables
-
-Create a `.env.local` file:
-```env
-HUGGINGFACE_API_KEY=hf_xxxxxxxxxxxxx
-```
-
-Get your free API key from [Hugging Face](https://huggingface.co/settings/tokens)
-
-## 🎯 Features in Detail
-
-### Conversational AI
-- Natural language understanding
-- Context-aware responses
-- Conversation memory (remembers previous messages)
-- Handles off-topic queries gracefully
-
-### Smart Filtering
-- Genre detection (Action, Comedy, Drama, etc.)
-- Year range filtering (90s, 2000s, recent, classics)
-- Rating filters (highly rated, best)
-- Title-based search with prioritization
-
-### Optimized Performance
-- Limited to 5 movies per query for faster responses
-- 4-message conversation history for context efficiency
-- 30-second timeout protection
-- Optimized token usage (250 max tokens)
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## 📝 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## 👨‍💻 Author
-
-**Your Name**
-- GitHub: https://github.com/FatimaBashirDev
-- LinkedIn: https://www.linkedin.com/in/fatima-bashir-b9a538346/
-
-## 🙏 Acknowledgments
-
-- [Hugging Face](https://huggingface.co/) for AI API
-- [The Movie Database (TMDb)](https://www.themoviedb.org/) for movie posters
-- [Vercel](https://vercel.com/) for hosting
-- [Next.js](https://nextjs.org/) for the amazing framework
-
-## ⭐ Show your support
-
-Give a ⭐️ if this project helped you learn about AI chatbots and RAG implementation!
-
----
-
-**Built with ❤️ and AI**
-```
-
----
-
-## **ULTRA-SHORT VERSION (Twitter/LinkedIn):**
-```
-🎬 Built an AI movie chatbot with Next.js + Hugging Face Llama 3.2!
-
-Features RAG architecture, Netflix-style UI, and conversational recommendations.
-
-Live demo: https://aimovie-recommendation-chatbot-l0qxkj90x.vercel.app/
-GitHub: https://github.com/FatimaBashirDev
-
-#NextJS #AI #MachineLearning #ReactJS
-GitHub: https://github.com/FatimaBashirDev
-
-#NextJS #AI #MachineLearning #ReactJS
+Built with ❤️ by Fatima Bashir

@@ -21,7 +21,7 @@ interface User {
 
 const navLinks: NavLink[] = [
   { href: '/', label: 'Home' },
-  { href: '/login', label: 'AI Chat' },
+  { href: '/chat', label: 'AI Chat' },
   { href: '/trending', label: 'Trending' },
   { href: '/browse', label: 'Browse' },
 ];
@@ -73,6 +73,16 @@ export default function Navbar() {
     window.location.href = '/login'
   }
 
+  const handleChatClick = async (e: React.MouseEvent) => {
+    e.preventDefault()
+    const { data: { session } } = await supabase.auth.getSession()
+    if (session) {
+      window.location.href = '/chat'
+    } else {
+      window.location.href = '/login'
+    }
+  }
+
   // Get user display name
   const getUserDisplayName = (): string => {
     if (!user) return '';
@@ -115,17 +125,27 @@ export default function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-6">
             {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`text-sm font-medium transition-all duration-200 ${
-                  isActive(link.href)
-                    ? 'text-white scale-105'
-                    : 'text-[#B3B3B3] hover:text-white hover:bg-white/10'
-                }`}
-              >
-                {link.label}
-              </Link>
+              link.href === '/chat' ? (
+                <button
+                  key={link.href}
+                  onClick={handleChatClick}
+                  className="text-sm font-medium transition-all duration-200 text-[#B3B3B3] hover:text-white cursor-pointer"
+                >
+                  {link.label}
+                </button>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`text-sm font-medium transition-all duration-200 ${
+                    isActive(link.href)
+                      ? 'text-white scale-105'
+                      : 'text-[#B3B3B3] hover:text-white hover:bg-white/10'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              )
             ))}
           </div>
         </div>

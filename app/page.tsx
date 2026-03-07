@@ -1,7 +1,12 @@
+'use client'
+
 import Link from "next/link";
 import { Brain, TrendingUp, Film, MessageSquare, Sparkles, Zap, Target, Shield, Heart, Star } from "lucide-react";
 import { movies } from "@/lib/movies";
 import Footer from "@/components/Footer";
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
+import { supabase } from '@/lib/supabase'
 
 interface FeatureCardProps {
   icon: React.ReactNode;
@@ -22,7 +27,17 @@ function FeatureCard({ icon, title, description }: FeatureCardProps) {
 }
 
 export default function Home() {
+  const router = useRouter()
   const featuredMovies = movies.slice(0, 6);
+
+  const handleStartChatting = async () => {
+    const { data: { session } } = await supabase.auth.getSession()
+    if (session) {
+      window.location.href = '/chat'
+    } else {
+      window.location.href = '/login'
+    }
+  }
 
   return (
     <div className="min-h-screen bg-[#000000]">
@@ -56,14 +71,14 @@ export default function Home() {
           </p>
 
           {/* CTA Button */}
-          <Link
-            href="/login"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#E50914] text-white font-semibold text-lg hover:bg-[#F40612] transition-all duration-300 hover:scale-105 hover:shadow-lg animate-fade-in-up"
+          <button
+            onClick={handleStartChatting}
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#E50914] text-white font-semibold text-lg hover:bg-[#F40612] transition-all duration-300 hover:scale-105 hover:shadow-lg animate-fade-in-up cursor-pointer"
             style={{ animationDelay: "0.3s" }}
           >
             <Brain className="w-5 h-5" />
             Start Chatting
-          </Link>
+          </button>
         </div>
 
         {/* Scroll indicator */}
@@ -250,13 +265,13 @@ export default function Home() {
               <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
                 Start chatting with our AI assistant now
               </p>
-              <Link
-                href="/login"
-                className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#E50914] text-white font-semibold text-lg hover:bg-[#F40612] transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#E50914]/25"
+              <button
+                onClick={handleStartChatting}
+                className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#E50914] text-white font-semibold text-lg hover:bg-[#F40612] transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#E50914]/25 cursor-pointer"
               >
                 <Brain className="w-6 h-6" />
                 Start Chatting
-              </Link>
+              </button>
             </div>
           </div>
         </div>

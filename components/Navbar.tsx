@@ -115,7 +115,7 @@ export default function Navbar() {
           {/* Netflix-style Logo */}
           <Link href="/" className="flex items-center gap-2 group">
             <span className="text-2xl md:text-3xl font-bold text-red-600 group-hover:text-red-500 transition-colors">
-              N
+              C
             </span>
             <span className="hidden sm:block text-lg font-semibold text-white tracking-wide">
               CineMatch
